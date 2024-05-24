@@ -1,6 +1,5 @@
 package com.micro.orderservice.messaging;
 
-
 import com.micro.orderservice.entities.Order;
 import com.micro.orderservice.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
