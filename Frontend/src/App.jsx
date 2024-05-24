@@ -3,15 +3,20 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import ProductList from "./pages/ProductList";
 
+import Hero from "./components/Hero";
+
 import "./App.css";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/products" element={<ProductList />} />
-      </Routes>
-    </Router>
+    <>
+      <Hero />
+      <Router>
+        <Routes>
+          <Route path="/products" element={<ProductList />} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 

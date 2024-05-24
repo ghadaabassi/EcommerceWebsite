@@ -8,6 +8,7 @@ const api = axios.create({
 
 export const fetchProducts = () => api.get("/products/getAll");
 export const fetchProductById = (id) => api.get(`/products/${id}`);
+
 export const createOrder = (order) => api.post("/orders", order);
 export const login = (credentials) => api.post("/auth/login", credentials);
 export const register = (user) => api.post("/auth/register", user);

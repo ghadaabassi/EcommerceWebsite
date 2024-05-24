@@ -25,19 +25,19 @@ public class OrderController {
     @Autowired
     private OrderEventProducer orderEventProducer;
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Order> getAllOrders() {
 
         return orderRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("getOrder/{id}")
     public Order getOrderById(@PathVariable("id") Long id) {
         //List<Order> order = orderRepository.findById(id);
         return orderRepository.findById(id).orElse(null);
     }
 
-    @PostMapping
+    @PostMapping("/addOrder")
     @Transactional
     public Order createOrder(@RequestBody Order order) {
 
@@ -47,7 +47,7 @@ public class OrderController {
         return savedOrder;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("updateOrder/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable("id") Long id, @RequestBody Order order) {
         if (!orderRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -57,7 +57,7 @@ public class OrderController {
         return ResponseEntity.ok(updatedOrder);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deleteOrder/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable("id") Long id) {
         if (!orderRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
