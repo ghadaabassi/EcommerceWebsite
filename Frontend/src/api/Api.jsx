@@ -9,7 +9,13 @@ const api = axios.create({
 export const fetchProducts = () => api.get("/products/getAll");
 export const fetchProductById = (id) => api.get(`/products/${id}`);
 
-export const createOrder = (order) => api.post("/orders", order);
+const API_BASE_URL1 = "http://localhost:8082";
+
+const api1 = axios.create({
+  baseURL: API_BASE_URL1,
+});
+
+export const createOrder = (order) => api1.post("/orders/addOrder", order);
 export const login = (credentials) => api.post("/auth/login", credentials);
 export const register = (user) => api.post("/auth/register", user);
 
