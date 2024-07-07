@@ -1,60 +1,88 @@
 package com.micro.productservice.controllers;
 
 
-
+import com.micro.productservice.entities.File;
 import com.micro.productservice.entities.Product;
-import com.micro.productservice.repository.IProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.micro.productservice.entities.ProductDTO;
+import com.micro.productservice.services.IFileService;
+import com.micro.productservice.services.ProductService;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/products")
-@CrossOrigin(origins = "http://localhost:5173")
 
 public class ProductController {
 
-    @Autowired
-    private IProductRepository productRepository;
+    private ProductService productService;
+    private IFileService fileService;
+
+    @PutMapping("/addImage/{id}")
+    public ResponseEntity<Product> addImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) {
+        try {
+            File savedFile = fileService.saveFile(file);
+            if (savedFile != null) {
+                Product updatedProduct = productService.addImageProduct(id, savedFile);
+                return ResponseEntity.ok(updatedProduct);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 
     @GetMapping("/getAll")
-    public List<Product> getAllProducts() {
-        //List<Product> productList = productRepository.findAll();
-        return (List<Product>) productRepository.findAll();
+    public List<ProductDTO> getAllProducts() {
+        return productService.getAllProducts();
     }
 
-    @GetMapping("/getProduct/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
 
     @PostMapping("/addProduct")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product savedProduct = productRepository.save(product);
-        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+        Product createdProduct = productService.addProduct(product);
+        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
     @PutMapping("/updateProduct/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
-        if (!productRepository.existsById(id)) {
+        if (productService.getProduct(id) == null) {
             return ResponseEntity.notFound().build();
         }
         product.setId(id);
-        Product updatedProduct = productRepository.save(product);
+        Product updatedProduct = productService.updateProduct(product);
         return ResponseEntity.ok(updatedProduct);
+    }
+
+    @GetMapping("/getProduct/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable("id") Long id) {
+        Product product = productService.getProduct(id);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(product);
     }
 
     @DeleteMapping("/deleteProduct/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
-        if (!productRepository.existsById(id)) {
+        Product deletedProduct = productService.deleteProduct(id);
+        if (deletedProduct == null) {
             return ResponseEntity.notFound().build();
         }
-        productRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }
