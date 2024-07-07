@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { createOrder } from "../api/Api";
+import "../styles/Order.css";
 
 const Order = ({ productId }) => {
   const [quantity, setQuantity] = useState(1);
@@ -22,7 +23,10 @@ const Order = ({ productId }) => {
           min="1"
         />
       </label>
-      <button type="submit">Place Order</button>
+
+      <button className="addButton" type="submit">
+        Add To Cart
+      </button>
     </form>
   );
 };
