@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchProducts } from "../api/Api";
+import Order from "./Order";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -17,7 +18,11 @@ const ProductList = () => {
       <h1>Products</h1>
       <ul>
         {products.map((product) => (
-          <li key={product.id}>{product.name}</li>
+          <li key={product.id}>
+            {product.name}
+
+            <Order productId={product.id} />
+          </li>
         ))}
       </ul>
     </div>

@@ -16,16 +16,29 @@ import org.springframework.transaction.annotation.Transactional;
 @NoArgsConstructor
 public class OrderService {
 
-
     private IOrderRepository orderRepository;
 
     private OrderEventProducer orderEventProducer;
+
 
     @Transactional
     public void processOrder(Order order) {
         Order savedOrder = orderRepository.save(order);
 
         orderEventProducer.sendOrderEvent(savedOrder);
-
     }
+
+    public String deleteOrder(Long orderId) {
+        if (orderRepository.existsById(orderId)) {
+            orderRepository.deleteById(orderId);
+            orderEventProducer.sendOrderDeletedEvent(orderId);
+        } else {
+            throw new RuntimeException("Order not found with id: " + orderId);
+        }
+
+
+        return "Deleted with success !";
+    }
+
+
 }
