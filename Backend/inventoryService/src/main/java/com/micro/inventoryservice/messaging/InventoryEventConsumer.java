@@ -9,17 +9,23 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 
-
 @Component
 public class InventoryEventConsumer {
 
     @Autowired
     private InventoryService inventoryService;
 
-    @KafkaListener(topics = "order-events")
+    @KafkaListener(topics = "order-events" , groupId ="inventory-service-group")
     public void consumeOrderEvent(Order order) {
         System.out.println("Consumed Order: " + order);
         inventoryService.updateInventory(order);
     }
+
+    @KafkaListener(topics = "order-deleted-events", groupId ="inventory-service-group")
+    public void consumeOrderDeletedEvent(Long orderId) {
+        System.out.println("Consumed Order Deleted: " + orderId);
+        inventoryService.deleteOrder(orderId);
+    }
+
 
 }

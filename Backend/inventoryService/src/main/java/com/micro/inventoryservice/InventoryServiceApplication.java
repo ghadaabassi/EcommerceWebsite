@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.micro")
-@EnableJpaRepositories(basePackages = {"com.micro.productservice.repository" , "com.micro.orderservice.repository"})
+@EnableJpaRepositories(basePackages = {"com.micro.productservice.repository" , "com.micro.orderservice.repository","com.micro.inventoryservice.repository"})
 
 public class InventoryServiceApplication {
 
