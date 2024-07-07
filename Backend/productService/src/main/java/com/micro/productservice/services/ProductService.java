@@ -46,15 +46,6 @@ public class ProductService implements IProductService{
     }
 
 
-
-    public List<Product> findProductsContainingName(String productName) {
-        return productRepository.findByNameContaining(productName);
-    }
-
-    public Page<Product> findProductsContainingName(String productName, Pageable pageable) {
-        return productRepository.findByNameContaining(productName, pageable);
-    }
-
     public Product getProduct(long idProduct) {
         return productRepository.findById(idProduct).orElse(null);
     }
