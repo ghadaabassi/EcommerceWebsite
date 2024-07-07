@@ -1,0 +1,58 @@
+.gif-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1020px;
+  margin-top: -300px;
+  margin-bottom: 100px;
+}
+
+.gif-container img {
+  width: 400px;
+  height: auto;
+  border-radius: 20px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.content {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.hometitle {
+  color: rgb(93, 177, 149);
+  margin-top: 10px;
+}
+
+.descrip {
+  margin-top: 120px;
+  width: 850px;
+  font-size: 20px;
+  text-align: start;
+  margin-left: 140px;
+}
+
+.startButton {
+  width: 150px;
+  height: 60px;
+  font-weight: bold;
+  border-color: rgb(225, 213, 236);
+  border-radius: 9px;
+  border-width: 2px;
+  font-size: 19px;
+  margin-top: 20px;
+  margin-right: 340px;
+ 
+}
+
+.startButton:hover {
+  border-color: rgb(161, 230, 222);
+}
