@@ -1,12 +1,16 @@
 package com.micro.customerservice.Service;
 
 import com.micro.customerservice.Controller.CustomerRequest;
+import com.micro.customerservice.Controller.CustomerResponse;
 import com.micro.customerservice.Repositories.ICustomerRepository;
 import com.micro.customerservice.entities.Customer;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +31,15 @@ public class CustomerServiceImpl implements ICustomerService{
         var customer= customerRepository.findById(request.id()).orElse(null);
         mergeCustomer(customer,request);
         customerRepository.save(customer);
+    }
+
+    @Override
+    public List<CustomerResponse> findAllCustomers() {
+        return customerRepository.findAll()
+                .stream()
+                .map(customerMapper::fromCustomer)
+                .collect(Collectors.toList())
+                ;
     }
 
     private  void mergeCustomer(Customer customer, CustomerRequest request){
