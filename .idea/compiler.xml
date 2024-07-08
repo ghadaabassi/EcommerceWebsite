@@ -10,6 +10,7 @@
         <module name="eurekaService" />
         <module name="configService" />
         <module name="inventoryService" />
+        <module name="customerService" />
         <module name="gatewayService" />
         <module name="orderService" />
         <module name="productService" />
@@ -19,6 +20,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="configService" options="-parameters" />
+      <module name="customerService" options="-parameters" />
       <module name="eurekaService" options="-parameters" />
       <module name="gatewayService" options="-parameters" />
       <module name="inventoryService" options="-parameters" />
