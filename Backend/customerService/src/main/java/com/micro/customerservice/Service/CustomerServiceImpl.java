@@ -42,6 +42,11 @@ public class CustomerServiceImpl implements ICustomerService{
                 ;
     }
 
+    @Override
+    public Boolean getCustomerById(String id) {
+        return customerRepository.findById(id).isPresent();
+    }
+
     private  void mergeCustomer(Customer customer, CustomerRequest request){
         if(StringUtils.isNotBlank(request.firstname())){
             customer.setFirstname(request.firstname());

@@ -12,4 +12,6 @@ public interface ICustomerService {
     void updateCustomer(CustomerRequest request);
 
     List<CustomerResponse> findAllCustomers();
+
+    Boolean getCustomerById(String id);
 }
