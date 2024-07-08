@@ -18,4 +18,6 @@ public interface ICustomerService {
 
 
     CustomerResponse findCustomerById(String id);
+
+    void deleteCustomer(String id);
 }

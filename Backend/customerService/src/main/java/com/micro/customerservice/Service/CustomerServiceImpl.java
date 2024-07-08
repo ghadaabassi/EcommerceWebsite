@@ -54,6 +54,11 @@ public class CustomerServiceImpl implements ICustomerService{
                 .orElse(null);
     }
 
+    @Override
+    public void deleteCustomer(String id) {
+        customerRepository.deleteById(id);
+    }
+
     private  void mergeCustomer(Customer customer, CustomerRequest request){
         if(StringUtils.isNotBlank(request.firstname())){
             customer.setFirstname(request.firstname());
