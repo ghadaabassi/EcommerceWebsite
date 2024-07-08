@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerServiceImpl implements ICustomerService{
 
     private final ICustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
     @Override
     public String createCustomer(CustomerRequest request) {
-        return null;
+        var customer = customerRepository.save(customerMapper.toCustomer(request));
+        return customer.getId();
     }
 }
