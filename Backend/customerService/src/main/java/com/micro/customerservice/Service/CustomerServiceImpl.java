@@ -47,6 +47,13 @@ public class CustomerServiceImpl implements ICustomerService{
         return customerRepository.findById(id).isPresent();
     }
 
+    @Override
+    public CustomerResponse findCustomerById(String id) {
+        return customerRepository.findById(id)
+                .map(customerMapper::fromCustomer)
+                .orElse(null);
+    }
+
     private  void mergeCustomer(Customer customer, CustomerRequest request){
         if(StringUtils.isNotBlank(request.firstname())){
             customer.setFirstname(request.firstname());
