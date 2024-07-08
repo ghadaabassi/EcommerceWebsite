@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements ICustomerService{
     }
 
     @Override
-    public Boolean getCustomerById(String id) {
+    public Boolean existCustomerById(String id) {
         return customerRepository.findById(id).isPresent();
     }
 

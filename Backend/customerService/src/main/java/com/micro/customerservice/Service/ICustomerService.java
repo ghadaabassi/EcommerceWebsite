@@ -13,5 +13,5 @@ public interface ICustomerService {
 
     List<CustomerResponse> findAllCustomers();
 
-    Boolean getCustomerById(String id);
+    Boolean existCustomerById(String id);
 }
