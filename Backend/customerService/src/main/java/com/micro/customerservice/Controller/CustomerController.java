@@ -5,10 +5,7 @@ import com.micro.customerservice.Service.ICustomerService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/customer")
@@ -23,4 +20,13 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.createCustomer(request));
 
     }
+
+    @PutMapping("/updateCustomer")
+    public ResponseEntity<Void> updateCustomer(
+        @RequestBody @Valid CustomerRequest request){
+
+        customerService.updateCustomer(request);
+        return ResponseEntity.accepted().build();
+    }
+
 }
