@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/products")
+@RequestMapping("/api/v1/products")
 
 public class ProductController {
 
@@ -45,10 +45,10 @@ public class ProductController {
 
 
     @GetMapping("/getAll")
-    public List<ProductDTO> getAllProducts() {
-        return productService.getAllProducts();
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        List<ProductDTO> products = productService.getAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
-
 
     @PostMapping("/addProduct")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
