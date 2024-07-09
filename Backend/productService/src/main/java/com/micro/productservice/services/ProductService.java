@@ -81,11 +81,4 @@ public class ProductService implements IProductService{
        return null;
     }
 
-
-    /*
-    public List<Product> getAllProductsByCategoryAndSubcategory(MainCategory mainCategory, SubCategory subCategory) {
-        return productRepository.findByMainCategoryAndSubCategory(mainCategory, subCategory);
-    }
-*/
-
 }

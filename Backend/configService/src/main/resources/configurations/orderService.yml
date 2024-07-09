@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://192.168.56.102:5432/order
+    username: ghada
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8082
+
+application:
+  config:
+    customer-url: http://localhost:8088/api/v1/customers
+    product-url: http://localhost:8088/api/v1/products
+    payment-url: http://localhost:8088/api/v1/payments
