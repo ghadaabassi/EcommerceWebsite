@@ -21,7 +21,6 @@ public class FileController {
     @PostMapping("/upload")
     public File uploadFile(@RequestParam("file") MultipartFile file) {
         return fileService.saveFile(file);
-
     }
 
     @DeleteMapping("/delete/{id}")
