@@ -6,7 +6,6 @@ import com.micro.customerservice.Repositories.ICustomerRepository;
 import com.micro.customerservice.entities.Customer;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
