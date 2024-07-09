@@ -5,6 +5,7 @@ import com.micro.productservice.enums.Category;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 
 
 @Entity
@@ -19,7 +20,9 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    private double price;
+    private double qt;
+
+    private BigDecimal price;
 
     @OneToOne(cascade = CascadeType.ALL)
     private File file;

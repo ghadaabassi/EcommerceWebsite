@@ -9,13 +9,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eurekaService" />
         <module name="configService" />
-        <module name="inventoryService" />
         <module name="customerService" />
         <module name="gatewayService" />
         <module name="orderService" />
         <module name="productService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="inventoryService" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
