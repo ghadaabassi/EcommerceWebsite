@@ -5,9 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface IFileService {
 
-    File getFileById(Long id);
+    File getFileById(int id);
     File saveFile(MultipartFile file);
-    boolean deleteFileById(Long id);
+    boolean deleteFileById(int id);
 
 
 }

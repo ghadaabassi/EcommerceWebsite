@@ -15,7 +15,7 @@ import lombok.Setter;
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String fileName;
     @Lob
     @Column(length = 1000000000)

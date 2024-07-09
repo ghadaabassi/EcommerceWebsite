@@ -46,7 +46,7 @@ public class ProductService implements IProductService{
     }
 
 
-    public Product getProduct(long idProduct) {
+    public Product getProduct(int idProduct) {
         return productRepository.findById(idProduct).orElse(null);
     }
 
@@ -62,7 +62,7 @@ public class ProductService implements IProductService{
     }
 
 
-    public Product deleteProduct(long idProduct) {
+    public Product deleteProduct(int idProduct) {
         Optional<Product> product = productRepository.findById(idProduct);
         product.ifPresent(productRepository::delete);
         return product.orElse(null);
@@ -70,7 +70,7 @@ public class ProductService implements IProductService{
 
 
     @Override
-    public Product addImageProduct(Long id, File file) {
+    public Product addImageProduct(int id, File file) {
       Product pr = productRepository.findById(id).orElse(null);
 
         if (pr != null) {

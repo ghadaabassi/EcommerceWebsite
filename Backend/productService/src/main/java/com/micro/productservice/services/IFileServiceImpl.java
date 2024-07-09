@@ -30,7 +30,7 @@ public class IFileServiceImpl implements IFileService{
 
 
     @Override
-    public boolean deleteFileById(Long id) {
+    public boolean deleteFileById(int id) {
         File fileEntity = fileRepository.findById(id).orElse(null);
         if (fileEntity != null) {
             fileRepository.delete(fileEntity);
@@ -40,7 +40,7 @@ public class IFileServiceImpl implements IFileService{
     }
 
 @Override
-    public File getFileById(Long id) {
+    public File getFileById(int id) {
         return fileRepository.findById(id).orElse(null);
     }
 }

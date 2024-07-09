@@ -28,7 +28,7 @@ public class ProductController {
     private IFileService fileService;
 
     @PutMapping("/addImage/{id}")
-    public ResponseEntity<Product> addImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Product> addImage(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
         try {
             File savedFile = fileService.saveFile(file);
             if (savedFile != null) {
@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     @PutMapping("/updateProduct/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
         if (productService.getProduct(id) == null) {
             return ResponseEntity.notFound().build();
         }
@@ -67,7 +67,7 @@ public class ProductController {
     }
 
     @GetMapping("/getProduct/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable("id") Long id) {
+    public ResponseEntity<Product> getProduct(@PathVariable("id") int id) {
         Product product = productService.getProduct(id);
         if (product == null) {
             return ResponseEntity.notFound().build();
@@ -76,7 +76,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/deleteProduct/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") int id) {
         Product deletedProduct = productService.deleteProduct(id);
         if (deletedProduct == null) {
             return ResponseEntity.notFound().build();

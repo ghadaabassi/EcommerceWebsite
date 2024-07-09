@@ -5,17 +5,22 @@ import com.micro.productservice.enums.Category;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 
 public class ProductDTO {
 
-    private Long id;
+    private int id;
     private String name;
     private String description;
-    private double price;
     private String fileName;
     private String fileData;
     private Category category;
+    private double qt;
+    private BigDecimal price;
+
+
 
 }

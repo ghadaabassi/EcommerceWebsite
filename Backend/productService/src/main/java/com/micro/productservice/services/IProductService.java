@@ -5,5 +5,5 @@ import com.micro.productservice.entities.Product;
 
 public interface IProductService {
 
-    public Product addImageProduct(Long id, File file);
+    public Product addImageProduct(int id, File file);
 }

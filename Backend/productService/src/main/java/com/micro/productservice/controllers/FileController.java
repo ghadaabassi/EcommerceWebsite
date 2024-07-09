@@ -25,7 +25,7 @@ public class FileController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteFile(@PathVariable Long id) {
+    public ResponseEntity<String> deleteFile(@PathVariable int id) {
         try {
             boolean deleted = fileService.deleteFileById(id);
             if (deleted) {
@@ -40,7 +40,7 @@ public class FileController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getFile(@PathVariable int id) {
 
         File FileEntity = fileService.getFileById(id);
 
