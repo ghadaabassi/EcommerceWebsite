@@ -20,7 +20,6 @@ public class CustomerController {
             @RequestBody @Valid CustomerRequest request
     ){
         return ResponseEntity.ok(customerService.createCustomer(request));
-
     }
 
     @PutMapping("/updateCustomer")
