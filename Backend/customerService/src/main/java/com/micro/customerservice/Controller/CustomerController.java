@@ -2,7 +2,6 @@ package com.micro.customerservice.Controller;
 
 
 import com.micro.customerservice.Service.ICustomerService;
-import com.micro.customerservice.entities.Customer;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
