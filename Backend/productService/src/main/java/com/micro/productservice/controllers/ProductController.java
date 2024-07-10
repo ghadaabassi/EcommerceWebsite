@@ -1,16 +1,12 @@
 package com.micro.productservice.controllers;
 
 
-import com.micro.productservice.entities.File;
-import com.micro.productservice.entities.Product;
+import com.micro.productservice.entities.*;
 
-import com.micro.productservice.entities.ProductDTO;
 import com.micro.productservice.services.IFileService;
-import com.micro.productservice.services.ProductService;
+import com.micro.productservice.services.IProductService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +20,11 @@ import java.util.List;
 
 public class ProductController {
 
-    private ProductService productService;
+    private IProductService productService;
     private IFileService fileService;
+
+
+
 
     @PutMapping("/addImage/{id}")
     public ResponseEntity<Product> addImage(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
@@ -41,47 +40,6 @@ public class ProductController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-    }
-
-
-    @GetMapping("/getAll")
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        List<ProductDTO> products = productService.getAllProducts();
-        return new ResponseEntity<>(products, HttpStatus.OK);
-    }
-
-    @PostMapping("/addProduct")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product createdProduct = productService.addProduct(product);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/updateProduct/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
-        if (productService.getProduct(id) == null) {
-            return ResponseEntity.notFound().build();
-        }
-        product.setId(id);
-        Product updatedProduct = productService.updateProduct(product);
-        return ResponseEntity.ok(updatedProduct);
-    }
-
-    @GetMapping("/getProduct/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable("id") int id) {
-        Product product = productService.getProduct(id);
-        if (product == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(product);
-    }
-
-    @DeleteMapping("/deleteProduct/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") int id) {
-        Product deletedProduct = productService.deleteProduct(id);
-        if (deletedProduct == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.noContent().build();
     }
 
 
