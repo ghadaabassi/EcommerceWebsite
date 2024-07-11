@@ -1,5 +1,6 @@
-package com.micro.orderservice.entities;
+package com.micro.orderservice.entities.OrderLine;
 
+import com.micro.orderservice.entities.Order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import lombok.*;
 public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    int id;
 
     @ManyToOne
     @JoinColumn(name="order_id")

@@ -2,14 +2,13 @@ package com.micro.orderservice.controller;
 
 
 
-import com.micro.orderservice.entities.Order;
-import com.micro.orderservice.entities.OrderRequest;
-import com.micro.orderservice.repository.IOrderRepository;
-import com.micro.orderservice.service.IOrderService;
+import com.micro.orderservice.entities.Order.Order;
+import com.micro.orderservice.entities.Order.OrderRequest;
+import com.micro.orderservice.repository.Order.IOrderRepository;
+import com.micro.orderservice.service.Order.IOrderService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

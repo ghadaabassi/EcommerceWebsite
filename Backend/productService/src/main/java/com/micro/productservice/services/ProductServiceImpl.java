@@ -7,7 +7,6 @@ import com.micro.productservice.controllers.ProductRequest;
 import com.micro.productservice.controllers.ProductResponse;
 import com.micro.productservice.entities.File;
 import com.micro.productservice.entities.Product;
-import com.micro.productservice.entities.ProductDTO;
 import com.micro.productservice.repository.IProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -32,48 +31,6 @@ public class ProductServiceImpl implements IProductService{
                 .map(productMapper::fromProduct)
                 .collect(Collectors.toList());
     }
-
-
-
-    private ProductDTO convertToDTO(Product product) {
-        ProductDTO dto = new ProductDTO();
-        dto.setId(product.getId());
-        dto.setName(product.getName());
-        dto.setDescription(product.getDescription());
-        dto.setPrice(product.getPrice());
-        dto.setCategory(product.getCategory());
-
-        if (product.getFile() != null) {
-            dto.setFileName(product.getFile().getFileName());
-            dto.setFileData(Base64.getEncoder().encodeToString(product.getFile().getData()));
-        }
-
-        return dto;
-    }
-
-
-    public Product getProduct(int idProduct) {
-        return productRepository.findById(idProduct).orElse(null);
-    }
-
-    public Product addProduct(Product product) {
-        return productRepository.save(product);
-    }
-
-    public Product updateProduct(Product product) {
-        if (productRepository.existsById(product.getId())) {
-            return productRepository.save(product);
-        }
-        return null;
-    }
-
-
-    public Product deleteProduct(int idProduct) {
-        Optional<Product> product = productRepository.findById(idProduct);
-        product.ifPresent(productRepository::delete);
-        return product.orElse(null);
-    }
-
 
     @Override
     public Product addImageProduct(int id, File file) {

@@ -1,4 +1,4 @@
-package com.micro.orderservice.entities;
+package com.micro.orderservice.entities.Purchase;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

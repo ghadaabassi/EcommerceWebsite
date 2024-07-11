@@ -6,7 +6,6 @@ import com.micro.productservice.controllers.ProductRequest;
 import com.micro.productservice.controllers.ProductResponse;
 import com.micro.productservice.entities.File;
 import com.micro.productservice.entities.Product;
-import com.micro.productservice.entities.ProductDTO;
 
 import java.util.List;
 

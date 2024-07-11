@@ -1,8 +1,9 @@
-package com.micro.orderservice.entities;
+package com.micro.orderservice.entities.Order;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.micro.orderservice.entities.Purchase.PurchaseRequest;
 import com.micro.orderservice.enums.PayementMethod;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

@@ -1,4 +1,4 @@
-package com.micro.orderservice.entities;
+package com.micro.orderservice.entities.Customer;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

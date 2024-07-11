@@ -1,6 +1,6 @@
-package com.micro.orderservice.repository;
+package com.micro.orderservice.repository.Order;
 
-import com.micro.orderservice.entities.Order;
+import com.micro.orderservice.entities.Order.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
