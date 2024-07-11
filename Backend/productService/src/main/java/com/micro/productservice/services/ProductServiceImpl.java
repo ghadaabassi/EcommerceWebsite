@@ -3,6 +3,7 @@ package com.micro.productservice.services;
 
 import com.micro.productservice.controllers.ProductPurchaseRequest;
 import com.micro.productservice.controllers.ProductPurchaseResponse;
+import com.micro.productservice.controllers.ProductResponse;
 import com.micro.productservice.entities.File;
 import com.micro.productservice.entities.Product;
 import com.micro.productservice.entities.ProductDTO;
@@ -24,9 +25,11 @@ public class ProductServiceImpl implements IProductService{
 
 
 @Override
-    public List<ProductDTO> getAllProducts() {
-        List<Product> products = productRepository.findAll();
-        return products.stream().map(this::convertToDTO).collect(Collectors.toList());
+    public List<ProductResponse> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(productMapper::fromProduct)
+                .collect(Collectors.toList());
     }
 
 

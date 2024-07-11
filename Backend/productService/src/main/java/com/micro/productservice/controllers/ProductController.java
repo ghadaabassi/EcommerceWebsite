@@ -23,9 +23,9 @@ public class ProductController {
     private IProductService productService;
     private IFileService fileService;
 
-    @GetMapping("/getAll")
-    public List<ProductDTO> getAllProducts() {
-        return productService.getAllProducts();
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> findAll() {
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @PostMapping("/purchase")
@@ -37,20 +37,20 @@ public class ProductController {
 
 
     @PutMapping("/addImage/{id}")
-    public ResponseEntity<Product> addImage(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
-        try {
-            File savedFile = fileService.saveFile(file);
-            if (savedFile != null) {
-                Product updatedProduct = productService.addImageProduct(id, savedFile);
-                return ResponseEntity.ok(updatedProduct);
-            } else {
+    public ResponseEntity<Product> addImage(@PathVariable("id") int id, @RequestParam("file") MultipartFile file){
+            try {
+                File savedFile = fileService.saveFile(file);
+                if (savedFile != null) {
+                    Product updatedProduct = productService.addImageProduct(id, savedFile);
+                    return ResponseEntity.ok(updatedProduct);
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-    }
 
 
 }
