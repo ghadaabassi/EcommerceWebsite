@@ -14,7 +14,7 @@ import java.util.Base64;
 @Service
 public class ProductMapper {
 
-    public Product toProdut(ProductRequest request) {
+    public Product toProduct(ProductRequest request) {
         if (request==null){
             return null;
         }

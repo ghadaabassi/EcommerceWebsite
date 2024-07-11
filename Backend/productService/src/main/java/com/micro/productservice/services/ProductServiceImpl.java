@@ -3,6 +3,7 @@ package com.micro.productservice.services;
 
 import com.micro.productservice.controllers.ProductPurchaseRequest;
 import com.micro.productservice.controllers.ProductPurchaseResponse;
+import com.micro.productservice.controllers.ProductRequest;
 import com.micro.productservice.controllers.ProductResponse;
 import com.micro.productservice.entities.File;
 import com.micro.productservice.entities.Product;
@@ -123,6 +124,14 @@ public class ProductServiceImpl implements IProductService{
         return productRepository.findById(productId)
                 .map(productMapper::fromProduct)
                 .orElse(null);
+    }
+
+    @Override
+    public Integer createProduct(
+            ProductRequest request
+    ) {
+        var product = productMapper.toProduct(request);
+        return productRepository.save(product).getId();
     }
 
 }
