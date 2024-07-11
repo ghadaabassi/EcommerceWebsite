@@ -1,4 +1,4 @@
-package com.micro.productservice.entities;
+package com.micro.productservice.controllers;
 
 import com.micro.productservice.enums.Category;
 import jakarta.validation.constraints.NotNull;
@@ -13,11 +13,14 @@ public record ProductRequest(
         String name,
         @NotNull(message = "Product description is required")
         String description,
-        @Positive(message = "Available quantity should be positive")
-        double availableQuantity,
-        @Positive(message = "Price should be positive")
-        BigDecimal price,
         @NotNull(message = "Product category is required")
-        Category category
+        Category category,
+        @Positive(message = "Available quantity should be positive")
+        double qt,
+        @Positive(message = "Price should be positive")
+        BigDecimal price
+
+
+
 ) {
 }

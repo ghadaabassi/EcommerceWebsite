@@ -1,12 +1,20 @@
 package com.micro.productservice.services;
 
+import com.micro.productservice.controllers.ProductPurchaseRequest;
+import com.micro.productservice.controllers.ProductPurchaseResponse;
 import com.micro.productservice.entities.File;
 import com.micro.productservice.entities.Product;
-import com.micro.productservice.entities.ProductRequest;
+import com.micro.productservice.entities.ProductDTO;
+
+import java.util.List;
 
 public interface IProductService {
 
     public Product addImageProduct(int id, File file);
 
-    Integer createProduct(ProductRequest request);
+
+
+    List<ProductDTO> getAllProducts();
+
+    List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> request);
 }

@@ -1,17 +1,17 @@
 package com.micro.productservice.services;
 
 
+import com.micro.productservice.controllers.ProductPurchaseRequest;
+import com.micro.productservice.controllers.ProductPurchaseResponse;
 import com.micro.productservice.entities.File;
 import com.micro.productservice.entities.Product;
 import com.micro.productservice.entities.ProductDTO;
 import com.micro.productservice.repository.IProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,12 +20,16 @@ public class ProductServiceImpl implements IProductService{
 
 
     private final IProductRepository productRepository;
+    private final ProductMapper productMapper;
 
 
+@Override
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
+
+
 
     private ProductDTO convertToDTO(Product product) {
         ProductDTO dto = new ProductDTO();
@@ -77,6 +81,38 @@ public class ProductServiceImpl implements IProductService{
             return productRepository.save(pr);
         }
        return null;
+    }
+
+    @Override
+    @Transactional
+    public List<ProductPurchaseResponse> purchaseProducts(
+            List<ProductPurchaseRequest> request
+    ) {
+        var productIds = request
+                .stream()
+                .map(ProductPurchaseRequest::productId)
+                .toList();
+        var storedProducts = productRepository.findAllByIdInOrderById(productIds);
+        if (productIds.size() != storedProducts.size()) {
+            throw new NoSuchElementException("One or more products not found");
+        }
+        var sortedRequest = request
+                .stream()
+                .sorted(Comparator.comparing(ProductPurchaseRequest::productId))
+                .toList();
+        var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
+        for (int i = 0; i < storedProducts.size(); i++) {
+            var product = storedProducts.get(i);
+            var productRequest = sortedRequest.get(i);
+            if (product.getQt() < productRequest.quantity()) {
+                throw new IllegalArgumentException("Insufficient quantity for product ID: " + product.getId());
+            }
+            var newAvailableQuantity = product.getQt() - productRequest.quantity();
+            product.setQt(newAvailableQuantity);
+            productRepository.save(product);
+            purchasedProducts.add(productMapper.toproductPurchaseResponse(product, productRequest.quantity()));
+        }
+        return purchasedProducts;
     }
 
 }
