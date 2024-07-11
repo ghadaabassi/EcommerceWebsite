@@ -23,10 +23,20 @@ public class ProductController {
     private IProductService productService;
     private IFileService fileService;
 
-    @GetMapping
+    @GetMapping("/getAllProducts")
     public ResponseEntity<List<ProductResponse>> findAll() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
+
+
+    @GetMapping("getProductById/{id}")
+    public ResponseEntity<ProductResponse> findById(
+            @PathVariable("id") Integer productId
+    ) {
+        return ResponseEntity.ok(productService.findById(productId));
+    }
+
+
 
     @PostMapping("/purchase")
     public ResponseEntity<List<ProductPurchaseResponse>> purchaseProducts(
@@ -34,7 +44,6 @@ public class ProductController {
     ) {
         return ResponseEntity.ok(productService.purchaseProducts(request));
     }
-
 
     @PutMapping("/addImage/{id}")
     public ResponseEntity<Product> addImage(@PathVariable("id") int id, @RequestParam("file") MultipartFile file){

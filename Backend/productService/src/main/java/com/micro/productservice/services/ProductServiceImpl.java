@@ -118,4 +118,11 @@ public class ProductServiceImpl implements IProductService{
         return purchasedProducts;
     }
 
+    @Override
+    public ProductResponse findById(Integer productId) {
+        return productRepository.findById(productId)
+                .map(productMapper::fromProduct)
+                .orElse(null);
+    }
+
 }

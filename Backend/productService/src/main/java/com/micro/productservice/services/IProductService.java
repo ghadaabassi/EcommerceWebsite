@@ -18,4 +18,6 @@ public interface IProductService {
     List<ProductResponse> getAllProducts();
 
     List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> request);
+
+    ProductResponse findById(Integer productId);
 }
