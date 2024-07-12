@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public record ProductRequest(
 
-        Integer id,
+        int id,
         @NotNull(message = "Product name is required")
         String name,
         @NotNull(message = "Product description is required")

@@ -18,7 +18,7 @@ public class File {
     private int id;
     private String fileName;
     @Lob
-    @Column(columnDefinition = "BYTEA",length = 1000000000)
+    @Column(length = 1000000000)
     private byte[] data;
 
 
