@@ -5,6 +5,7 @@ package com.micro.orderservice.service.Order;
 import com.micro.orderservice.entities.Customer.ICustomerClient;
 import com.micro.orderservice.entities.Order.Order;
 import com.micro.orderservice.entities.Order.OrderRequest;
+import com.micro.orderservice.entities.Order.OrderResponse;
 import com.micro.orderservice.entities.OrderLine.OrderLineRequest;
 import com.micro.orderservice.entities.Product.IProductClient;
 import com.micro.orderservice.entities.Purchase.ProductPurchaseRequest;
@@ -12,11 +13,14 @@ import com.micro.orderservice.kafka.OrderConfirmation;
 import com.micro.orderservice.kafka.OrderProducer;
 import com.micro.orderservice.repository.Order.IOrderRepository;
 import com.micro.orderservice.service.OrderLine.OrderLineService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -31,16 +35,6 @@ public class OrderServiceImpl implements IOrderService {
     private OrderProducer orderProducer;
 
 
-    public String deleteOrder(int orderId) {
-        if (orderRepository.existsById(orderId)) {
-            orderRepository.deleteById(orderId);
-        } else {
-            throw new RuntimeException("Order not found with id: " + orderId);
-        }
-
-
-        return "Deleted with success !";
-    }
 
 
 
@@ -80,6 +74,21 @@ public class OrderServiceImpl implements IOrderService {
        );
 
         return order.getId(); }
+
+
+@Override
+    public List<OrderResponse> findAllOrders() {
+        return this.orderRepository.findAll()
+                .stream()
+                .map(this.orderMapper::fromOrder)
+                .collect(Collectors.toList());
+    }
+@Override
+    public OrderResponse findById(Integer id) {
+        return this.orderRepository.findById(id)
+                .map(this.orderMapper::fromOrder)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("No order found with the provided ID: %d", id)));
+    }
 
 
 }
