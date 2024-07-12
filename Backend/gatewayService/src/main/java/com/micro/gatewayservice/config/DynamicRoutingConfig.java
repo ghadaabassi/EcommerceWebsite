@@ -25,7 +25,10 @@ public class DynamicRoutingConfig {
                 .route("customer-service", r -> r.path("api/v1/customer/**")
                         .uri("lb://customerService"))
                 .route("order-lines-service",r -> r.path("api/v1/order-lines/**")
-                        .uri("lb://OrderService"))
+                        .uri("lb://orderService"))
+                .route("payment-service",r -> r.path("api/v1/payments/**")
+                        .uri("lb://paymentService"))
+
                 .build();
     }
 
