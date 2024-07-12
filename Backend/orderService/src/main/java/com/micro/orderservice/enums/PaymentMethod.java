@@ -1,6 +1,6 @@
 package com.micro.orderservice.enums;
 
-public enum PayementMethod {
+public enum PaymentMethod {
 
         CREDIT_CARD,
         VISA,

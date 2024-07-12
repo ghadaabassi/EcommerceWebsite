@@ -2,7 +2,7 @@ package com.micro.orderservice.entities.Order;
 
 
 import com.micro.orderservice.entities.OrderLine.OrderLine;
-import com.micro.orderservice.enums.PayementMethod;
+import com.micro.orderservice.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -33,7 +33,7 @@ public class Order {
     private BigDecimal totalAmount;
 
     @Enumerated(EnumType.STRING)
-    private PayementMethod payementMethod;
+    private PaymentMethod payementMethod;
 
     @OneToMany(mappedBy = "order")
     private List<OrderLine> orderLines;

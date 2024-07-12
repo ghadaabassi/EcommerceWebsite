@@ -4,7 +4,7 @@ package com.micro.orderservice.entities.Order;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.micro.orderservice.entities.Purchase.ProductPurchaseRequest;
-import com.micro.orderservice.enums.PayementMethod;
+import com.micro.orderservice.enums.PaymentMethod;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ public record OrderRequest(
         @Positive(message = "Order amount should be positive")
         BigDecimal amount,
         @NotNull(message = "Payment method should be precised")
-        PayementMethod paymentMethod,
+        PaymentMethod paymentMethod,
         @NotNull(message = "Customer should be present")
         @NotEmpty(message = "Customer should be present")
         @NotBlank(message = "Customer should be present")
