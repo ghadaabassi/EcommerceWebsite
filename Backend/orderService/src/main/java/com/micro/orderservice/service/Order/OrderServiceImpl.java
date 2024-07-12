@@ -3,7 +3,6 @@ package com.micro.orderservice.service.Order;
 
 
 import com.micro.orderservice.entities.Customer.ICustomerClient;
-import com.micro.orderservice.entities.Order.Order;
 import com.micro.orderservice.entities.Order.OrderRequest;
 import com.micro.orderservice.entities.Order.OrderResponse;
 import com.micro.orderservice.entities.OrderLine.OrderLineRequest;
@@ -12,7 +11,7 @@ import com.micro.orderservice.entities.Purchase.ProductPurchaseRequest;
 import com.micro.orderservice.kafka.OrderConfirmation;
 import com.micro.orderservice.kafka.OrderProducer;
 import com.micro.orderservice.repository.Order.IOrderRepository;
-import com.micro.orderservice.service.OrderLine.OrderLineService;
+import com.micro.orderservice.service.OrderLine.IOrderLineService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -31,16 +30,11 @@ public class OrderServiceImpl implements IOrderService {
     private ICustomerClient custommerClient;
     private IProductClient productClient;
     private OrderMapper orderMapper;
-    private OrderLineService orderLineService;
+    private IOrderLineService orderLineService;
     private OrderProducer orderProducer;
-
-
-
-
 
     @Override
     public Integer addOrder(OrderRequest orderRequest) {
-
 
 
     var customer = custommerClient.findCustomerById(orderRequest.customerId())
@@ -58,7 +52,6 @@ public class OrderServiceImpl implements IOrderService {
                             order.getId(),
                             purchaseRequest.productId(),
                             purchaseRequest.quantity()
-
                     )
             );
        }

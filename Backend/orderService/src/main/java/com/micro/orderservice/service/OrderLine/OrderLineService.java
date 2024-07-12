@@ -11,20 +11,21 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class OrderLineService {
+public class OrderLineService implements IOrderLineService{
 
     private final IOrderLineRepository orderLineRepository;
-    private final OrderLineMapper mapper;
+    private final OrderLineMapper orderLineMapper;
 
+    @Override
     public Integer saveOrderLine(OrderLineRequest request) {
-        var order = mapper.toOrderLine(request);
+        var order = orderLineMapper.toOrderLine(request);
         return orderLineRepository.save(order).getId();
     }
-
+@Override
     public List<OrderLineResponse> findAllByOrderId(Integer orderId) {
         return orderLineRepository.findAllByOrderId(orderId)
                 .stream()
-                .map(mapper::toOrderLineResponse)
+                .map(orderLineMapper::toOrderLineResponse)
                 .collect(Collectors.toList());
     }
 }
