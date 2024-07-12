@@ -31,19 +31,19 @@ public class OrderController {
     }
 
     @GetMapping("getOrder/{id}")
-    public Order getOrderById(@PathVariable("id") Long id) {
+    public Order getOrderById(@PathVariable("id") int id) {
         //List<Order> order = orderRepository.findById(id);
         return orderRepository.findById(id).orElse(null);
     }
 
     @PostMapping("/addOrder")
-    public ResponseEntity<Order> createOrder(@RequestBody  @Valid OrderRequest orderRequest) {
+    public ResponseEntity<Integer> createOrder(@RequestBody  @Valid OrderRequest orderRequest) {
 
         return ResponseEntity.ok(orderService.addOrder(orderRequest));
     }
 
     @PutMapping("updateOrder/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable("id") Long id, @RequestBody Order order) {
+    public ResponseEntity<Order> updateOrder(@PathVariable("id") int id, @RequestBody Order order) {
         if (!orderRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -53,7 +53,7 @@ public class OrderController {
     }
 
     @DeleteMapping("deleteOrder/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable("id") int id) {
         if (!orderRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

@@ -7,7 +7,9 @@ import com.micro.orderservice.entities.Order.Order;
 import com.micro.orderservice.entities.Order.OrderRequest;
 import com.micro.orderservice.entities.OrderLine.OrderLineRequest;
 import com.micro.orderservice.entities.Product.IProductClient;
-import com.micro.orderservice.entities.Purchase.PurchaseRequest;
+import com.micro.orderservice.entities.Purchase.ProductPurchaseRequest;
+import com.micro.orderservice.kafka.OrderConfirmation;
+import com.micro.orderservice.kafka.OrderProducer;
 import com.micro.orderservice.repository.Order.IOrderRepository;
 import com.micro.orderservice.service.OrderLine.OrderLineService;
 import lombok.AllArgsConstructor;
@@ -26,10 +28,10 @@ public class OrderServiceImpl implements IOrderService {
     private IProductClient productClient;
     private OrderMapper orderMapper;
     private OrderLineService orderLineService;
+    private OrderProducer orderProducer;
 
 
-
-    public String deleteOrder(Long orderId) {
+    public String deleteOrder(int orderId) {
         if (orderRepository.existsById(orderId)) {
             orderRepository.deleteById(orderId);
         } else {
@@ -43,19 +45,19 @@ public class OrderServiceImpl implements IOrderService {
 
 
     @Override
-    public Order addOrder(OrderRequest orderRequest) {
+    public Integer addOrder(OrderRequest orderRequest) {
 
 
 
     var customer = custommerClient.findCustomerById(orderRequest.customerId())
             .orElseThrow(() -> new NoSuchElementException("Customer with ID " + orderRequest.customerId() + " not found"));
 
-     this.productClient.purchaseProducts(orderRequest.products());
+     var purchasedProducts= this.productClient.purchaseProducts(orderRequest.products());
 
 
         var order = this.orderRepository.save(orderMapper.toOrder(orderRequest));
 
-       for(PurchaseRequest purchaseRequest:orderRequest.products()){
+       for(ProductPurchaseRequest purchaseRequest:orderRequest.products()){
             orderLineService.saveOrderLine(
                     new OrderLineRequest(
                             null,
@@ -67,7 +69,17 @@ public class OrderServiceImpl implements IOrderService {
             );
        }
 
-        return null;}
+       orderProducer.sendOrderConfirmation(
+               new OrderConfirmation(
+               orderRequest.reference(),
+               orderRequest.amount(),
+               orderRequest.paymentMethod(),
+               customer,
+               purchasedProducts.getBody()
+               )
+       );
+
+        return order.getId(); }
 
 
 }

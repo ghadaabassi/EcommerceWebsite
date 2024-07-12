@@ -6,7 +6,7 @@ import com.micro.orderservice.entities.Order.OrderRequest;
 public interface IOrderService {
 
 
-    public String deleteOrder(Long id);
+    public String deleteOrder(int id);
 
-    Order addOrder(OrderRequest orderRequest);
+    Integer addOrder(OrderRequest orderRequest);
 }

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
-public record PurchaseRequest(
+public record ProductPurchaseRequest(
         @NotNull(message = "Product is mandatory")
         Integer productId,
         @Positive(message = "Quantity is mandatory")

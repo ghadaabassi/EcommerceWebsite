@@ -3,7 +3,7 @@ package com.micro.orderservice.entities.Order;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.micro.orderservice.entities.Purchase.PurchaseRequest;
+import com.micro.orderservice.entities.Purchase.ProductPurchaseRequest;
 import com.micro.orderservice.enums.PayementMethod;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -25,7 +25,7 @@ public record OrderRequest(
         @NotBlank(message = "Customer should be present")
         String customerId,
         @NotEmpty(message = "You should at least purchase one product")
-        List<PurchaseRequest> products
+        List<ProductPurchaseRequest> products
 ) {
 
 }
