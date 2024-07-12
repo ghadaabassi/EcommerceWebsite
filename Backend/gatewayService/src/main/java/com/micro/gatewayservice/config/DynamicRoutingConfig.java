@@ -18,12 +18,14 @@ public class DynamicRoutingConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("product-service", r -> r.path("/products/**")
+                .route("product-service", r -> r.path("api/v1/products/**")
                         .uri("lb://productService"))
-                .route("order-service", r -> r.path("/orders/**")
+                .route("order-service", r -> r.path("api/v1/orders/**")
                         .uri("lb://orderService"))
-                .route("inventory-service", r -> r.path("/inventory/**")
-                        .uri("lb://inventoryService"))
+                .route("customer-service", r -> r.path("api/v1/customer/**")
+                        .uri("lb://customerService"))
+                .route("order-lines-service",r -> r.path("api/v1/order-lines/**")
+                        .uri("lb://OrderService"))
                 .build();
     }
 
