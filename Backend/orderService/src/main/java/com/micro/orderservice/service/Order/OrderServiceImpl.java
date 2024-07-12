@@ -2,12 +2,14 @@ package com.micro.orderservice.service.Order;
 
 
 
+import com.micro.orderservice.controller.payment.PaymentClient;
 import com.micro.orderservice.entities.Customer.ICustomerClient;
 import com.micro.orderservice.entities.Order.OrderRequest;
 import com.micro.orderservice.entities.Order.OrderResponse;
 import com.micro.orderservice.entities.OrderLine.OrderLineRequest;
 import com.micro.orderservice.entities.Product.IProductClient;
 import com.micro.orderservice.entities.Purchase.ProductPurchaseRequest;
+import com.micro.orderservice.entities.payment.PaymentRequest;
 import com.micro.orderservice.kafka.OrderConfirmation;
 import com.micro.orderservice.kafka.OrderProducer;
 import com.micro.orderservice.repository.Order.IOrderRepository;
@@ -33,6 +35,8 @@ public class OrderServiceImpl implements IOrderService {
     private IOrderLineService orderLineService;
     private OrderProducer orderProducer;
 
+    private PaymentClient paymentClient;
+
     @Override
     public Integer addOrder(OrderRequest orderRequest) {
 
@@ -55,6 +59,18 @@ public class OrderServiceImpl implements IOrderService {
                     )
             );
        }
+
+
+       var paymentRequest= new PaymentRequest(
+              orderRequest.amount(),
+              orderRequest.paymentMethod(),
+               orderRequest.id(),
+               orderRequest.reference(),
+               customer
+
+       );
+       paymentClient.requestOrderPayment(paymentRequest);
+
 
        orderProducer.sendOrderConfirmation(
                new OrderConfirmation(
