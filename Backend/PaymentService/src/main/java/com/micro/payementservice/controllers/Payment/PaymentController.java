@@ -1,6 +1,6 @@
 package com.micro.payementservice.controllers.Payment;
 
-import com.micro.payementservice.services.IPaymentService;
+import com.micro.payementservice.services.payment.IPaymentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

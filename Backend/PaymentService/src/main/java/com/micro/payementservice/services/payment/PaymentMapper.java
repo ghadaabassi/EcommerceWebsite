@@ -1,4 +1,4 @@
-package com.micro.payementservice.services;
+package com.micro.payementservice.services.payment;
 
 
 import com.micro.payementservice.controllers.Payment.PaymentRequest;
