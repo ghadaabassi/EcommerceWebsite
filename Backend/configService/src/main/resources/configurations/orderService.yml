@@ -26,5 +26,5 @@ application:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.type.mapping: orderConfirmation:com.micro.orderservice.kafka.OrderConfirmation
+        spring.json.type.mapping: OrderConfirmation:com.micro.orderservice.kafka.OrderConfirmation
 

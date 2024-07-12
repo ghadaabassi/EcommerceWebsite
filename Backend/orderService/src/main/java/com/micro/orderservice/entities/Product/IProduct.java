@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 @FeignClient(
-        name="productService",
+        name="product-Service",
         url = "${application.config.product-url}"
 )
-public interface IProductClient {
+public interface IProduct {
 
     @PostMapping("/purchase")
     ResponseEntity<List<ProductPurchaseResponse>> purchaseProducts(@RequestBody List<ProductPurchaseRequest> request);

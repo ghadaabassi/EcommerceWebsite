@@ -7,7 +7,7 @@ import com.micro.orderservice.entities.Customer.ICustomerClient;
 import com.micro.orderservice.entities.Order.OrderRequest;
 import com.micro.orderservice.entities.Order.OrderResponse;
 import com.micro.orderservice.entities.OrderLine.OrderLineRequest;
-import com.micro.orderservice.entities.Product.IProductClient;
+import com.micro.orderservice.entities.Product.IProduct;
 import com.micro.orderservice.entities.Purchase.ProductPurchaseRequest;
 import com.micro.orderservice.entities.payment.PaymentRequest;
 import com.micro.orderservice.kafka.OrderConfirmation;
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements IOrderService {
 
     private IOrderRepository orderRepository;
     private ICustomerClient custommerClient;
-    private IProductClient productClient;
+    private IProduct productClient;
     private OrderMapper orderMapper;
     private IOrderLineService orderLineService;
     private OrderProducer orderProducer;
@@ -78,8 +78,7 @@ public class OrderServiceImpl implements IOrderService {
                orderRequest.amount(),
                orderRequest.paymentMethod(),
                customer,
-               purchasedProducts.getBody()
-               )
+               purchasedProducts.getBody())
        );
 
         return order.getId(); }

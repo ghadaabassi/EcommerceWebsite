@@ -12,11 +12,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Getter
 @Setter
+@Entity
 @EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor
+@Table(name = "payment")
 public class Payment {
 
     @Id
