@@ -38,7 +38,6 @@ public class ProductServiceImpl implements IProductService{
 
         if (pr != null) {
             pr.setFile(file);
-            pr.setFile(file);
             return productRepository.save(pr);
         }
        return null;
