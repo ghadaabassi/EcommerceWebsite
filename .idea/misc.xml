@@ -11,6 +11,9 @@
         <option value="$PROJECT_DIR$/Backend/inventoryService/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/configService/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/customerService/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/PayementService/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/PaymentService/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/notificationService/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

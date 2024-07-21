@@ -47,7 +47,7 @@ public class OrderServiceImpl implements IOrderService {
      var purchasedProducts= this.productClient.purchaseProducts(orderRequest.products());
 
 
-        var order = this.orderRepository.save(orderMapper.toOrder(orderRequest));
+     var order = this.orderRepository.save(orderMapper.toOrder(orderRequest));
 
        for(ProductPurchaseRequest purchaseRequest:orderRequest.products()){
             orderLineService.saveOrderLine(

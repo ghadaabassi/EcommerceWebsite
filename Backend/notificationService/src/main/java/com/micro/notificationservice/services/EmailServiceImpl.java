@@ -79,7 +79,7 @@ public class EmailServiceImpl implements IEmailService{
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, UTF_8.name());
-        messageHelper.setFrom("contact@aliboucoding.com");
+        messageHelper.setFrom("amourazima@gmail.com");
 
         final String templateName = ORDER_CONFIRMATION.getTemplate();
 
