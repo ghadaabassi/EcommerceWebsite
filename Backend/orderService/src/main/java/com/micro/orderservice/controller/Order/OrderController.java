@@ -20,9 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderController {
 
-
     private IOrderService orderService;
-
 
     @GetMapping("/getAllOrders")
     public ResponseEntity<List<OrderResponse>> findAll() {

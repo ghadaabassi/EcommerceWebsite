@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class OrderLineService implements IOrderLineService{
+public class OrderLineServiceImpl implements IOrderLineService{
 
     private final IOrderLineRepository orderLineRepository;
     private final OrderLineMapper orderLineMapper;

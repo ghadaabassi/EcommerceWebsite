@@ -6,3 +6,17 @@ spring:
       discovery:
         locator:
           enabled: true
+      routes:
+        - id: customer-service
+          uri: lb://customerService
+          predicates:
+            - Path=/api/v1/customers/**
+        - id: order-service
+          uri: lb://orderService
+          predicates:
+            - Path=/api/v1/orders/**
+        - id: product-service
+          uri: lb://productService
+          predicates:
+            - Path=/api/v1/products/**
+
