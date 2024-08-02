@@ -1,14 +1,15 @@
 spring:
   datasource:
-    url: jdbc:postgresql://192.168.56.102:5432/order
-    username: ghada
+    url: jdbc:mysql://localhost:3306/diagnosis?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: root
     password: 1234
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
 server:
   port: 8082

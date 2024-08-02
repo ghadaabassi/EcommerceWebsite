@@ -1,12 +1,15 @@
 spring:
-  data:
-    mongodb:
-      username: ghada
-      password: 1234
-      host: 192.168.56.102
-      port: 27017
-      database: customer
-      authentication-database: admin
+  datasource:
+    url: jdbc:mysql://localhost:3306/diagnosis?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
 
 server:
