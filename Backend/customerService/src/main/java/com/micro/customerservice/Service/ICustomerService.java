@@ -8,16 +8,16 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ICustomerService {
-    String createCustomer(CustomerRequest request);
+    Long createCustomer(CustomerRequest request);
 
     void updateCustomer(CustomerRequest request);
 
     List<CustomerResponse> findAllCustomers();
 
-    Boolean existCustomerById(String id);
+    Boolean existCustomerById(Long id);
 
 
-    CustomerResponse findCustomerById(String id);
+    CustomerResponse findCustomerById(Long id);
 
-    void deleteCustomer(String id);
+    void deleteCustomer(Long id);
 }

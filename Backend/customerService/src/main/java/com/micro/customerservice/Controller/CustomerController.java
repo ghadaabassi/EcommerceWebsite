@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/customer")
+@RequestMapping("/api/v1/customers")
 @AllArgsConstructor
 public class CustomerController {
     private ICustomerService customerService;
 
     @PostMapping("/addCustomer")
-    public ResponseEntity<String> createCustomer(
+    public ResponseEntity<Long> createCustomer(
             @RequestBody @Valid CustomerRequest request
     ){
         return ResponseEntity.ok(customerService.createCustomer(request));
@@ -37,17 +37,17 @@ public class CustomerController {
     }
 
     @GetMapping("/existCustomer/{id}")
-    public ResponseEntity<Boolean> existCustomerById(@PathVariable("id") String id ){
+    public ResponseEntity<Boolean> existCustomerById(@PathVariable("id") Long id ){
       return ResponseEntity.ok(customerService.existCustomerById(id));
     }
 
     @GetMapping("/findCustomer/{id}")
-    public ResponseEntity<CustomerResponse> findCustomerById(@PathVariable("id") String id ){
+    public ResponseEntity<CustomerResponse> findCustomerById(@PathVariable("id") Long id ){
         return ResponseEntity.ok(customerService.findCustomerById(id));
     }
 
     @DeleteMapping("/deleteCustomer/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable("id") String id ){
+    public ResponseEntity<Void> deleteCustomer(@PathVariable("id") Long id ){
         customerService.deleteCustomer(id);
         return ResponseEntity.accepted().build();
     }

@@ -2,7 +2,9 @@ package com.micro.customerservice.Service;
 
 import com.micro.customerservice.Controller.CustomerRequest;
 import com.micro.customerservice.Controller.CustomerResponse;
+import com.micro.customerservice.Repositories.IAdressRepository;
 import com.micro.customerservice.Repositories.ICustomerRepository;
+import com.micro.customerservice.entities.Adress;
 import com.micro.customerservice.entities.Customer;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
@@ -17,9 +19,14 @@ public class CustomerServiceImpl implements ICustomerService{
 
     private final ICustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final IAdressRepository adressRepository;
 
     @Override
-    public String createCustomer(CustomerRequest request) {
+    public Long createCustomer(CustomerRequest request) {
+
+
+       adressRepository.save(request.address());
+
         var customer = customerRepository.save(customerMapper.toCustomer(request));
         return customer.getId();
     }
@@ -42,19 +49,19 @@ public class CustomerServiceImpl implements ICustomerService{
     }
 
     @Override
-    public Boolean existCustomerById(String id) {
+    public Boolean existCustomerById(Long id) {
         return customerRepository.findById(id).isPresent();
     }
 
     @Override
-    public CustomerResponse findCustomerById(String id) {
+    public CustomerResponse findCustomerById(Long id) {
         return customerRepository.findById(id)
                 .map(customerMapper::fromCustomer)
                 .orElse(null);
     }
 
     @Override
-    public void deleteCustomer(String id) {
+    public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
     }
 
