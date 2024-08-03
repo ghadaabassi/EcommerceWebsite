@@ -17,6 +17,7 @@ import com.micro.orderservice.service.OrderLine.IOrderLineService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,11 +26,10 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-@NoArgsConstructor
 public class OrderServiceImpl implements IOrderService {
 
     private IOrderRepository orderRepository;
-    private ICustomerClient custommerClient;
+    private ICustomerClient customerClient;
     private IProduct productClient;
     private OrderMapper orderMapper;
     private IOrderLineService orderLineService;
@@ -41,7 +41,7 @@ public class OrderServiceImpl implements IOrderService {
     public Integer addOrder(OrderRequest orderRequest) {
 
 
-    var customer = custommerClient.findCustomerById(orderRequest.customerId())
+    var customer = customerClient.findCustomerById(orderRequest.customerId())
             .orElseThrow(() -> new NoSuchElementException("Customer with ID " + orderRequest.customerId() + " not found"));
 
      var purchasedProducts= this.productClient.purchaseProducts(orderRequest.products());

@@ -28,7 +28,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String reference;
-    private String customerId;
+    private Long customerId;
 
     private BigDecimal totalAmount;
 

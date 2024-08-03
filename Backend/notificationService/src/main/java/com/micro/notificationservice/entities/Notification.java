@@ -3,29 +3,42 @@ package com.micro.notificationservice.entities;
 import com.micro.notificationservice.enums.NotificationType;
 import com.micro.notificationservice.kafka.OrderConfirmation;
 import com.micro.notificationservice.kafka.PaymentConfirmation;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@Document
 public class Notification {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
     private NotificationType type;
+
     private LocalDateTime notificationDate;
+
+    @Embedded
     private OrderConfirmation orderConfirmation;
+
+    @Embedded
     private PaymentConfirmation paymentConfirmation;
 }

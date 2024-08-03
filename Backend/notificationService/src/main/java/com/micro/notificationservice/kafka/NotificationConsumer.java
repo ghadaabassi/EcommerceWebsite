@@ -3,6 +3,7 @@ package com.micro.notificationservice.kafka;
 import com.micro.notificationservice.entities.Notification;
 import com.micro.notificationservice.repositories.INotificationRepository;
 import com.micro.notificationservice.services.IEmailService;
+import lombok.AllArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 
 import jakarta.mail.MessagingException;
@@ -19,7 +20,7 @@ import static java.lang.String.format;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class NotificationConsumer {
 
     private INotificationRepository repository;
@@ -34,12 +35,12 @@ public class NotificationConsumer {
                         .paymentConfirmation(paymentConfirmation)
                         .build()
         );
-        var customerName = paymentConfirmation.customerFirstname() + " " + paymentConfirmation.customerLastname();
+        var customerName = paymentConfirmation.customerFirstnamePayment() + " " + paymentConfirmation.customerLastnamePayment();
         emailService.sendPaymentSuccessEmail(
-                paymentConfirmation.customerEmail(),
+                paymentConfirmation.customerEmailPayment(),
                 customerName,
-                paymentConfirmation.amount(),
-                paymentConfirmation.orderReference()
+                paymentConfirmation.amountPayment(),
+                paymentConfirmation.orderReferencePayment()
         );
     }
 

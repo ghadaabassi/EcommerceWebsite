@@ -1,7 +1,9 @@
 package com.micro.notificationservice.entities;
 
-import java.math.BigDecimal;
+import jakarta.persistence.Embeddable;
 
+import java.math.BigDecimal;
+@Embeddable
 public record Product(
         Integer productId,
         String name,

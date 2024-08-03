@@ -21,9 +21,8 @@ public record OrderRequest(
         @NotNull(message = "Payment method should be precised")
         PaymentMethod paymentMethod,
         @NotNull(message = "Customer should be present")
-        @NotEmpty(message = "Customer should be present")
-        @NotBlank(message = "Customer should be present")
-        String customerId,
+
+        Long customerId,
         @NotEmpty(message = "You should at least purchase one product")
         List<ProductPurchaseRequest> products
 ) {

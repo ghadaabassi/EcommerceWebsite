@@ -11,6 +11,6 @@ public record OrderResponse(
         String reference,
         BigDecimal amount,
         PaymentMethod payementMethod,
-        String customerId
+        Long customerId
 ) {
 }

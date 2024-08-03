@@ -1,7 +1,7 @@
 package com.micro.productservice.enums;
 
 public enum Category {
-  Kids,
+    Kids,
     Home,
     Women,
     Clothes,
