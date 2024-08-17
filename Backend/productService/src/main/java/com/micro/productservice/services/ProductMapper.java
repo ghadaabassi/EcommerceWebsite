@@ -31,12 +31,19 @@ public class ProductMapper {
 
 
     public ProductResponse fromProduct(Product product){
+        String fileName = null;
+        String fileData = null;
+
+        if (product.getFile() != null) {
+            fileName = product.getFile().getFileName();
+            fileData = Base64.getEncoder().encodeToString(product.getFile().getData());
+        }
         return new ProductResponse(
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
-                product.getFile().getFileName(),
-                Base64.getEncoder().encodeToString(product.getFile().getData()),
+                fileName,
+                fileData,
                 product.getCategory(),
                 product.getQt(),
                 product.getPrice()
