@@ -27,6 +27,7 @@ public class NotificationConsumer {
     private IEmailService emailService;
     @KafkaListener(topics = "payment-topic")
     public void consumePaymentSuccessNotifications(PaymentConfirmation paymentConfirmation) throws MessagingException {
+        System.out.println("\n\n\nSent Tooooooooooooo1111 :"+paymentConfirmation.customerEmailPayment()+"\n\n\n");
         log.info(format("Consuming the message from payment-topic Topic:: %s", paymentConfirmation));
         repository.save(
                 Notification.builder()
@@ -46,6 +47,8 @@ public class NotificationConsumer {
 
     @KafkaListener(topics = "order-topic")
     public void consumeOrderConfirmationNotifications(OrderConfirmation orderConfirmation) throws MessagingException {
+
+        System.out.println("\n\n\nSent Tooooooooooooo1111 :"+orderConfirmation.customer().email()+"\n\n\n");
         log.info(format("Consuming the message from order-topic Topic:: %s", orderConfirmation));
         repository.save(
                 Notification.builder()
@@ -55,6 +58,8 @@ public class NotificationConsumer {
                         .build()
         );
         var customerName = orderConfirmation.customer().firstname() + " " + orderConfirmation.customer().lastname();
+
+        System.out.println("\n\n\nSent Tooooooooooooo :"+orderConfirmation.customer().email()+"\n\n\n");
         emailService.sendOrderConfirmationEmail(
                 orderConfirmation.customer().email(),
                 customerName,

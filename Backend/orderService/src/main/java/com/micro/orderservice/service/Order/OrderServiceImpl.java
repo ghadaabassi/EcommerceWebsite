@@ -69,7 +69,9 @@ public class OrderServiceImpl implements IOrderService {
                customer
 
        );
-       paymentClient.requestOrderPayment(paymentRequest);
+
+
+     //  paymentClient.requestOrderPayment(paymentRequest);
 
 
        orderProducer.sendOrderConfirmation(

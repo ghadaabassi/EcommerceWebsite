@@ -41,7 +41,7 @@ public class EmailServiceImpl implements IEmailService{
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, UTF_8.name());
-        messageHelper.setFrom("amourazima@gmail.com");
+        messageHelper.setFrom("ghada@gmail.com");
 
         final String templateName = PAYMENT_CONFIRMATION.getTemplate();
 
@@ -53,6 +53,7 @@ public class EmailServiceImpl implements IEmailService{
         Context context = new Context();
         context.setVariables(variables);
         messageHelper.setSubject(PAYMENT_CONFIRMATION.getSubject());
+        System.out.println("distttttttttt: "+destinationEmail);
 
         try {
             String htmlTemplate = templateEngine.process(templateName, context);
