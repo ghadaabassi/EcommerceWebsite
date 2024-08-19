@@ -12,7 +12,7 @@ export class HomeComponent {
 
   ngOnInit() {
     this.poductsService.getProducts().subscribe((products) => {
-      console.log('proddddddddddddd:  ' + products);
+      console.log('proddddddddddddd:  ' + JSON.stringify(products));
     });
   }
 }
