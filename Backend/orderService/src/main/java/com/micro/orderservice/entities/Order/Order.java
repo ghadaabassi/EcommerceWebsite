@@ -1,7 +1,7 @@
 package com.micro.orderservice.entities.Order;
 
 
-import com.micro.orderservice.entities.OrderLine.OrderLine;
+
 import com.micro.orderservice.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +12,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-
 
 
 @Entity(name = "`order`")
@@ -32,11 +31,12 @@ public class Order {
 
     private BigDecimal totalAmount;
 
+    @ElementCollection
+    private List<Integer> myProducts;
+
+
     @Enumerated(EnumType.STRING)
     private PaymentMethod payementMethod;
-
-    @OneToMany(mappedBy = "order")
-    private List<OrderLine> orderLines;
 
     @CreatedDate
     @Column(updatable = false,nullable = false)

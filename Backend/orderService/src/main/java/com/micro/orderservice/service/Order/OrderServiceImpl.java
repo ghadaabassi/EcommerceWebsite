@@ -6,18 +6,13 @@ import com.micro.orderservice.controller.payment.PaymentClient;
 import com.micro.orderservice.entities.Customer.ICustomerClient;
 import com.micro.orderservice.entities.Order.OrderRequest;
 import com.micro.orderservice.entities.Order.OrderResponse;
-import com.micro.orderservice.entities.OrderLine.OrderLineRequest;
 import com.micro.orderservice.entities.Product.IProduct;
-import com.micro.orderservice.entities.Purchase.ProductPurchaseRequest;
 import com.micro.orderservice.entities.payment.PaymentRequest;
 import com.micro.orderservice.kafka.OrderConfirmation;
 import com.micro.orderservice.kafka.OrderProducer;
 import com.micro.orderservice.repository.Order.IOrderRepository;
-import com.micro.orderservice.service.OrderLine.IOrderLineService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,12 +25,9 @@ public class OrderServiceImpl implements IOrderService {
 
     private IOrderRepository orderRepository;
     private ICustomerClient customerClient;
-    private IProduct productClient;
     private OrderMapper orderMapper;
-    private IOrderLineService orderLineService;
     private OrderProducer orderProducer;
 
-    private PaymentClient paymentClient;
 
     @Override
     public Integer addOrder(OrderRequest orderRequest) {
@@ -44,21 +36,6 @@ public class OrderServiceImpl implements IOrderService {
     var customer = customerClient.findCustomerById(orderRequest.customerId())
             .orElseThrow(() -> new NoSuchElementException("Customer with ID " + orderRequest.customerId() + " not found"));
 
-     var purchasedProducts= this.productClient.purchaseProducts(orderRequest.products());
-
-
-     var order = this.orderRepository.save(orderMapper.toOrder(orderRequest));
-
-       for(ProductPurchaseRequest purchaseRequest:orderRequest.products()){
-            orderLineService.saveOrderLine(
-                    new OrderLineRequest(
-                            null,
-                            order.getId(),
-                            purchaseRequest.productId(),
-                            purchaseRequest.quantity()
-                    )
-            );
-       }
 
 
        var paymentRequest= new PaymentRequest(
@@ -79,11 +56,10 @@ public class OrderServiceImpl implements IOrderService {
                orderRequest.reference(),
                orderRequest.amount(),
                orderRequest.paymentMethod(),
-               customer,
-               purchasedProducts.getBody())
-       );
+               customer
+       ));
 
-        return order.getId(); }
+        return orderRequest.id(); }
 
 
 @Override
