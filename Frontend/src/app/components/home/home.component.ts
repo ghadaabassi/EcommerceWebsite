@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
+import { ProductsService } from '../../services/product/products.service';
 @Component({
   selector: 'app-home',
   standalone: true,
