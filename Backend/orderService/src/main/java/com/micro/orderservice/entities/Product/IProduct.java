@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
         url = "${application.config.product-url}"
 )
 public interface IProduct {
-
     @PostMapping("/getProductById/{id}")
-    public ResponseEntity<ProductResponse> findById( @PathVariable("id") Integer productId );
+    ResponseEntity<ProductResponse> findById( @PathVariable("id") Integer productId );
 
 }

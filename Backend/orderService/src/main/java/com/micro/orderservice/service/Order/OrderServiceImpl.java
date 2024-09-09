@@ -37,8 +37,12 @@ public class OrderServiceImpl implements IOrderService {
             .orElseThrow(() -> new NoSuchElementException("Customer with ID " + orderRequest.customerId() + " not found"));
 
 
+    for(int i=0;i<orderRequest.myProducts().size();i++){
 
-       var paymentRequest= new PaymentRequest(
+    }
+
+
+    var paymentRequest= new PaymentRequest(
               orderRequest.amount(),
               orderRequest.paymentMethod(),
                orderRequest.id(),
