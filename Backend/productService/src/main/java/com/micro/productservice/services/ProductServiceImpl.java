@@ -43,37 +43,6 @@ public class ProductServiceImpl implements IProductService{
        return null;
     }
 
-    @Override
-    @Transactional
-    public List<ProductPurchaseResponse> purchaseProducts(
-            List<ProductPurchaseRequest> request
-    ) {
-        var productIds = request
-                .stream()
-                .map(ProductPurchaseRequest::productId)
-                .toList();
-        var storedProducts = productRepository.findAllByIdInOrderById(productIds);
-        if (productIds.size() != storedProducts.size()) {
-            throw new NoSuchElementException("One or more products not found");
-        }
-        var sortedRequest = request
-                .stream()
-                .sorted(Comparator.comparing(ProductPurchaseRequest::productId))
-                .toList();
-        var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
-        for (int i = 0; i < storedProducts.size(); i++) {
-            var product = storedProducts.get(i);
-            var productRequest = sortedRequest.get(i);
-            if (product.getQt() < productRequest.quantity()) {
-                throw new IllegalArgumentException("Insufficient quantity for product ID: " + product.getId());
-            }
-            var newAvailableQuantity = product.getQt() - productRequest.quantity();
-            product.setQt(newAvailableQuantity);
-            productRepository.save(product);
-            purchasedProducts.add(productMapper.toproductPurchaseResponse(product, productRequest.quantity()));
-        }
-        return purchasedProducts;
-    }
 
     @Override
     public ProductResponse findById(Integer productId) {

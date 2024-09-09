@@ -76,5 +76,13 @@ public class OrderServiceImpl implements IOrderService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("No order found with the provided ID: %d", id)));
     }
 
+    @Override
+    public OrderResponse addProductToOrder(int orderId, int productId) {
+
+
+
+        return null;
+    }
+
 
 }

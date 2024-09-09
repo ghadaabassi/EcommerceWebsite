@@ -1,6 +1,5 @@
 package com.micro.orderservice.service.Order;
 
-import com.micro.orderservice.entities.Order.Order;
 import com.micro.orderservice.entities.Order.OrderRequest;
 import com.micro.orderservice.entities.Order.OrderResponse;
 
@@ -13,4 +12,6 @@ public interface IOrderService {
     List<OrderResponse> findAllOrders();
 
     OrderResponse findById(Integer orderId);
+
+    OrderResponse addProductToOrder(int orderId,int productId);
 }
