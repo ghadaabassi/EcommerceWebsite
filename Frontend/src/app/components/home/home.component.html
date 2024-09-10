@@ -1,1 +1,23 @@
-<div>Homeeeeee</div>
+<div>
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchChange()"
+    placeholder="Search products..."
+  />
+  <div class="product-cards">
+    <div class="product-card" *ngFor="let product of filteredProducts">
+      <img
+        [src]="getImageUrl(product.fileData)"
+        alt="{{ product.name }}"
+        class="product-image"
+      />
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p><strong>Price:</strong> {{ product.price | currency }}</p>
+        <p><strong>Category:</strong> {{ product.category }}</p>
+      </div>
+    </div>
+  </div>
+</div>

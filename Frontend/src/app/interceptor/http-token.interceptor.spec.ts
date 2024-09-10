@@ -38,7 +38,7 @@ describe('httpTokenInterceptor', () => {
   });
 
   it('should add an Authorization header', () => {
-    // httpClient.get('/test').subscribe();
+
 
     const req = httpMock.expectOne('/test');
     expect(req.request.headers.has('Authorization')).toBeTruthy();
@@ -46,8 +46,6 @@ describe('httpTokenInterceptor', () => {
   });
 
   it('should not add an Authorization header if token is missing', () => {
-    // httpClient.get('/test').subscribe();
-
     const req = httpMock.expectOne('/test');
     expect(req.request.headers.has('Authorization')).toBeFalsy();
   });
