@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { KeycloakService } from '../keycloak/keycloak.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private keycloakService: KeycloakService
+  ) {}
 
   private url = 'http://localhost:8088/api/v1/';
 
   getProducts() {
-    return this.http.get(this.url + 'products/getAllProducts');
+    const token = this.keycloakService.profile?.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get(this.url + 'products/getAllProducts', { headers });
   }
 }

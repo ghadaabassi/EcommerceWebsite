@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { KeycloakService } from '../services/keycloak/keycloak.service';
 
 @Injectable()
-export class HttpTokenInterceptor implements HttpInterceptor {
+export class httpTokenInterceptor implements HttpInterceptor {
   constructor(private keycloakService: KeycloakService) {}
 
   intercept(

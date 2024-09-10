@@ -34,6 +34,7 @@ export class KeycloakService {
       this._profile = (await this.keycloak.loadUserProfile()) as UserProfile;
       this._profile.token = this.keycloak.token || '';
       console.log('Tokeeeen ' + this._profile.token);
+      localStorage.setItem('token', this._profile.token);
     }
   }
 

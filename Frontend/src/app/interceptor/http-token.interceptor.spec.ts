@@ -1,17 +1,54 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
-
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { httpTokenInterceptor } from './http-token.interceptor';
+import { KeycloakService } from '../services/keycloak/keycloak.service';
 
 describe('httpTokenInterceptor', () => {
-  const interceptor: HttpInterceptorFn = (req, next) => 
-    TestBed.runInInjectionContext(() => httpTokenInterceptor(req, next));
+  let httpMock: HttpTestingController;
+  let httpClient: HttpClient;
+  let mockKeycloakService: jasmine.SpyObj<KeycloakService>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    mockKeycloakService = jasmine.createSpyObj('KeycloakService', [], {
+      keycloak: { token: 'test-token' },
+    });
+
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: httpTokenInterceptor,
+          multi: true,
+        },
+        { provide: KeycloakService, useValue: mockKeycloakService },
+      ],
+    });
+
+    httpMock = TestBed.inject(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
   });
 
-  it('should be created', () => {
-    expect(interceptor).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should add an Authorization header', () => {
+    // httpClient.get('/test').subscribe();
+
+    const req = httpMock.expectOne('/test');
+    expect(req.request.headers.has('Authorization')).toBeTruthy();
+    expect(req.request.headers.get('Authorization')).toBe('Bearer test-token');
+  });
+
+  it('should not add an Authorization header if token is missing', () => {
+    // httpClient.get('/test').subscribe();
+
+    const req = httpMock.expectOne('/test');
+    expect(req.request.headers.has('Authorization')).toBeFalsy();
   });
 });

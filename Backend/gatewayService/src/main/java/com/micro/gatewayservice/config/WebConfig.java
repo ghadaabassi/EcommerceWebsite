@@ -18,7 +18,7 @@ public class WebConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
         config.setAllowedHeaders(Arrays.asList(
                 "Authorization",
                 "Cache-Control",

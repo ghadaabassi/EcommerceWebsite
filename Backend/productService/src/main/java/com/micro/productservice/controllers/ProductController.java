@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/products")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ProductController {
 
     private IProductService productService;
