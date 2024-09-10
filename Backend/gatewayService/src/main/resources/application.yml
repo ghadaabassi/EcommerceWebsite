@@ -1,4 +1,9 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://192.168.56.102:9095/realms/eCommerce"
   application:
     name: gatewayService
   config:

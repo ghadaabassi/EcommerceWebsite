@@ -33,6 +33,7 @@ export class KeycloakService {
     if (authenticated) {
       this._profile = (await this.keycloak.loadUserProfile()) as UserProfile;
       this._profile.token = this.keycloak.token || '';
+      console.log('Tokeeeen ' + this._profile.token);
     }
   }
 

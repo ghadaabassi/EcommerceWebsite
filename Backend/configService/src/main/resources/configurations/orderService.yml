@@ -16,10 +16,9 @@ server:
 
 application:
   config:
-    customer-url: http://localhost:8088/api/v1/customers
-    product-url: http://localhost:8088/api/v1/products
-    payment-url: http://localhost:8088/api/v1/payments
-
+    customer-url: http://localhost:8090/api/v1/customers
+    product-url: http://localhost:8097/api/v1/products
+    payment-url: http://localhost:8060/api/v1/payments
 
   kafka:
     producer:
