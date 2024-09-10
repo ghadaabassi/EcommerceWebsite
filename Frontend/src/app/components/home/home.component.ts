@@ -24,6 +24,7 @@ export class HomeComponent {
   products: Product[] = [];
   filteredProducts: any[] = [];
   searchTerm: string = '';
+  quantityMap: { [id: number]: number } = {};
 
   constructor(private poductsService: ProductsService) {}
 
@@ -51,4 +52,6 @@ export class HomeComponent {
         product.category.toLowerCase().includes(lowerCaseTerm)
     );
   }
+
+  addToCart(product: Product, quantity: number): void {}
 }

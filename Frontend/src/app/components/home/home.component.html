@@ -1,23 +1,41 @@
 <div>
-  <input
-    type="text"
-    [(ngModel)]="searchTerm"
-    (ngModelChange)="onSearchChange()"
-    placeholder="Search products..."
-  />
-  <div class="product-cards">
-    <div class="product-card" *ngFor="let product of filteredProducts">
-      <img
-        [src]="getImageUrl(product.fileData)"
-        alt="{{ product.name }}"
-        class="product-image"
-      />
-      <div class="product-info">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <p><strong>Price:</strong> {{ product.price | currency }}</p>
-        <p><strong>Category:</strong> {{ product.category }}</p>
+    <input 
+      type="text" 
+      [(ngModel)]="searchTerm" 
+      (ngModelChange)="onSearchChange()" 
+      placeholder="Search products..."
+    />
+    <div class="product-cards">
+      <div class="product-card" *ngFor="let product of filteredProducts">
+        <img
+          [src]="getImageUrl(product.fileData)"
+          alt="{{ product.name }}"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <p><strong>Price:</strong> {{ product.price | currency }}</p>
+          <p><strong>Category:</strong> {{ product.category }}</p>
+  
+          <div class="cart-actions">
+            <input 
+              type="number" 
+              [(ngModel)]="quantityMap[product.id]" 
+              min="1" 
+              [max]="product.qt" 
+              placeholder="Quantity"
+              class="quantity-input"
+            />
+            <button 
+              (click)="addToCart(product, quantityMap[product.id] || 0)" 
+              class="add-to-cart-button"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  
