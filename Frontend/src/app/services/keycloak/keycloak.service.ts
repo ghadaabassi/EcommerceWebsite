@@ -32,6 +32,18 @@ export class KeycloakService {
 
     if (authenticated) {
       this._profile = (await this.keycloak.loadUserProfile()) as UserProfile;
+      console.log('Usssser: ' + JSON.stringify(this._profile));
+
+      const websiteClientRoleArray =
+        this._profile.attributes?.websiteClientRole || [];
+      const websiteClientRole =
+        websiteClientRoleArray.length > 0 ? websiteClientRoleArray[0] : null;
+      console.log('Website Client Role: ', websiteClientRole);
+      localStorage.setItem(
+        'websiteClientRole',
+        JSON.stringify(websiteClientRole)
+      );
+
       this._profile.token = this.keycloak.token || '';
       console.log('Tokeeeen ' + this._profile.token);
       localStorage.setItem('token', this._profile.token);
