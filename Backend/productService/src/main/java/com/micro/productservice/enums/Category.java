@@ -8,5 +8,5 @@ public enum Category {
     Men,
     Sport,
     Electric,
-    Jewelery
+    Jewelry
 }

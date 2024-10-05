@@ -1,0 +1,71 @@
+<div class="container">
+  <h2>Add Product</h2>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Product Name:</label>
+      <input id="name" formControlName="name" />
+      <div
+        *ngIf="
+          productForm.get('name')?.invalid && productForm.get('name')?.touched
+        "
+      >
+        <small>Name is required.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <input id="description" formControlName="description" />
+      <div
+        *ngIf="
+          productForm.get('description')?.invalid &&
+          productForm.get('description')?.touched
+        "
+      >
+        <small>Description is required.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="qt">Quantity:</label>
+      <input id="qt" type="number" formControlName="qt" />
+      <div
+        *ngIf="productForm.get('qt')?.invalid && productForm.get('qt')?.touched"
+      >
+        <small>Quantity must be a positive number.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="price">Price:</label>
+      <input id="price" type="number" formControlName="price" />
+      <div
+        *ngIf="
+          productForm.get('price')?.invalid && productForm.get('price')?.touched
+        "
+      >
+        <small>Price must be a positive number.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="category">Category:</label>
+      <select id="category" formControlName="category">
+        <option value="" disabled>Select a category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          productForm.get('category')?.invalid &&
+          productForm.get('category')?.touched
+        "
+      >
+        <small>Category is required.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="productForm.invalid">Add Product</button>
+  </form>
+</div>

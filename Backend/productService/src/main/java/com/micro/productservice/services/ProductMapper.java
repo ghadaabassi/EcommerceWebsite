@@ -1,14 +1,13 @@
 package com.micro.productservice.services;
 
 
-import com.micro.productservice.controllers.ProductPurchaseResponse;
+
 import com.micro.productservice.controllers.ProductRequest;
 import com.micro.productservice.entities.Product;
 import com.micro.productservice.controllers.ProductResponse;
-import com.micro.productservice.enums.Category;
+
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.Base64;
 
 @Service
@@ -51,14 +50,5 @@ public class ProductMapper {
     }
 
 
-    public ProductPurchaseResponse toproductPurchaseResponse(Product product, double quantity) {
-        return new ProductPurchaseResponse(
-                product.getId(),
-                product.getName(),
-                product.getDescription(),
-                product.getPrice(),
-                quantity
-        );
-    }
 
 }

@@ -2,16 +2,7 @@ import { Component } from '@angular/core';
 import { ProductsService } from '../../services/product/products.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-export type Product = {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  fileName: string;
-  fileData: string;
-};
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-home',

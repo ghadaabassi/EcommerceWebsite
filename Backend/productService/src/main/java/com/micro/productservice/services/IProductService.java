@@ -1,6 +1,5 @@
 package com.micro.productservice.services;
 
-import com.micro.productservice.controllers.ProductPurchaseRequest;
 import com.micro.productservice.controllers.ProductPurchaseResponse;
 import com.micro.productservice.controllers.ProductRequest;
 import com.micro.productservice.controllers.ProductResponse;

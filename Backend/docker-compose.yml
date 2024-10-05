@@ -8,7 +8,6 @@ services:
     networks:
       - microservices-net
 
-
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
@@ -38,7 +37,6 @@ services:
       - microservices-net
 
 
-
   keycloak:
     container_name: keycloak-ms
     image: quay.io/keycloak/keycloak:24.0.2
@@ -51,9 +49,6 @@ services:
       - microservices-net
     command:
       - "start-dev"
-
-
-
 
   mail-dev:
     container_name: ms-mail-dev
